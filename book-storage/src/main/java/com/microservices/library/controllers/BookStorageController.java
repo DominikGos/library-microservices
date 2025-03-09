@@ -24,8 +24,13 @@ public class BookStorageController {
         return books;
     }
 
+    @GetMapping("/{id}")
+    public Book findById(@PathVariable final long id) {
+        return bookRepository.findById(id).orElseThrow(() -> new NullPointerException("Book not found!"));
+    }
+
     @PostMapping("")
-    public Book addBook(@ModelAttribute Book book) {
+    public Book addBook(@RequestBody Book book) {
         return bookRepository.save(book);
     }
 
