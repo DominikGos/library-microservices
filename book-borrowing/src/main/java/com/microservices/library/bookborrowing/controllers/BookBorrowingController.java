@@ -22,6 +22,9 @@ class RestTemplateConfiguration {
 public class BookBorrowingController {
 
     @Autowired
+    private BookStorageProxy bookStorageProxy;
+
+    @Autowired
     private RestTemplate restTemplate;
 
     @DeleteMapping("/{id}")
@@ -33,6 +36,13 @@ public class BookBorrowingController {
         } else {
             restTemplate.delete( "http://localhost:8100/books/" + id );
         }
+
+        return book;
+    }
+
+    @DeleteMapping("/feign/{id}")
+    public Book borrowBookFeign(@PathVariable int id) {
+        Book book = bookStorageProxy.deleteBook(id);
 
         return book;
     }
