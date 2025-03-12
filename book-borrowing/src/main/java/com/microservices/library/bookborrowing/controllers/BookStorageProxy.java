@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="book-storage", url="localhost:8100")
+@FeignClient(name="book-storage")
 public interface BookStorageProxy {
     @DeleteMapping("/books/{id}")
     Book deleteBook(@PathVariable("id") long id);
